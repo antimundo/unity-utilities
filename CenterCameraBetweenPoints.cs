@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CenterCameraBetweenPoints : MonoBehaviour
 {
+    [SerializeField] Camera cam;
     [SerializeField] Transform[] points;
     [SerializeField] LineRenderer[] lines;
     [SerializeField] float cameraSpeed = 3;
@@ -33,8 +34,8 @@ public class CenterCameraBetweenPoints : MonoBehaviour
             }
         }
 
-        Camera.main.orthographicSize = Mathf.Lerp(
-                Camera.main.orthographicSize,
+        cam.orthographicSize = Mathf.Lerp(
+                cam.orthographicSize,
                 longestVector.magnitude,
                 Time.deltaTime * cameraSpeed
             );
@@ -55,7 +56,7 @@ public class CenterCameraBetweenPoints : MonoBehaviour
         newPosition.y /= points.Length;
         newPosition.y = Mathf.Lerp(transform.position.y, newPosition.y, Time.deltaTime * cameraSpeed);
 
-        transform.position = newPosition;
+        cam.transform.position = newPosition;
     }
 
 }
